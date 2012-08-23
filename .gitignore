@@ -1,0 +1,6 @@
+.*
+!.gitignore
+!.gitsubmodule
+
+bundle/*
+!bundle/neobundle.vim
