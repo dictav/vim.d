@@ -31,3 +31,38 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tsukkee/unite-tag'
 "}}}
 "===============================================================================
+
+"===============================================================================
+"=インサートモードに入ったときにステータスラインの色を変える
+"{{{
+if has('syntax')
+   augroup InsertHook
+      " 現在のグループに対する「全て」の自動コマンドを削除。
+      autocmd!
+      autocmd InsertEnter * call s:StatusLine('Enter')
+      autocmd InsertLeave * call s:StatusLine('Leave')
+   augroup END
+endif
+
+let s:slhlcmd = ''
+function! s:StatusLine(mode)
+   if a:mode == 'Enter'
+      silent! let s:slhlcmd = 'highlight ' . s:GetStatusLineHighlight()
+      let cmd = 'hi StatusLine gui=None guifg=Black guibg=Green cterm=None ctermfg=Black ctermbg=Green'
+      silent exec cmd
+   else
+      highlight clear StatusLine
+      silent exec s:slhlcmd
+   endif
+endfunction
+
+function! s:GetStatusLineHighlight()
+   redir => hl
+   exec 'highlight StatusLine'
+   redir END
+   let hl = substitute(hl, '[\r\n]', '', 'g')
+   let hl = substitute(hl, 'xxx', '', '')
+   return hl
+endfunction
+"}}}
+
