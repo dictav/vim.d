@@ -12,7 +12,7 @@ set guioptions-=r
 set guioptions-=R
 set guioptions-=l
 set guioptions-=L
-set visualbel
+set visualbell
 
 if has('gui_macvim')
 	if has('gui_running')

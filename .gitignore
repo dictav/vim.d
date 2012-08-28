@@ -4,3 +4,6 @@
 
 bundle/*
 !bundle/neobundle.vim
+
+tmp/*
+!tmp/.git_keep
