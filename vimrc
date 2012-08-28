@@ -1,4 +1,5 @@
 lang ja_JP
+set encoding=utf-8
 
 "===============================================================================
 " NeoBundle
@@ -33,11 +34,11 @@ NeoBundle 'tsukkee/unite-tag'
 "===============================================================================
 
 "===============================================================================
-"=ƒCƒ“ƒT[ƒgƒ‚[ƒh‚É“ü‚Á‚½‚Æ‚«‚ÉƒXƒe[ƒ^ƒXƒ‰ƒCƒ“‚ÌF‚ğ•Ï‚¦‚é
+"=ã‚¤ãƒ³ã‚µãƒ¼ãƒˆãƒ¢ãƒ¼ãƒ‰ã«å…¥ã£ãŸã¨ãã«ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ©ã‚¤ãƒ³ã®è‰²ã‚’å¤‰ãˆã‚‹
 "{{{
 if has('syntax')
    augroup InsertHook
-      " Œ»İ‚ÌƒOƒ‹[ƒv‚É‘Î‚·‚éu‘S‚Äv‚Ì©“®ƒRƒ}ƒ“ƒh‚ğíœB
+      " ç¾åœ¨ã®ã‚°ãƒ«ãƒ¼ãƒ—ã«å¯¾ã™ã‚‹ã€Œå…¨ã¦ã€ã®è‡ªå‹•ã‚³ãƒãƒ³ãƒ‰ã‚’å‰Šé™¤ã€‚
       autocmd!
       autocmd InsertEnter * call s:StatusLine('Enter')
       autocmd InsertLeave * call s:StatusLine('Leave')
@@ -64,5 +65,17 @@ function! s:GetStatusLineHighlight()
    let hl = substitute(hl, 'xxx', '', '')
    return hl
 endfunction
+"}}}
+
+"===============================================================================
+" è¨­å®š
+"{{{
+colorscheme murphy
+syntax on
+set directory=~/.vim/tmp
+set backupdir=~/.vim/tmp
+set tabstop=8 softtabstop=3 shiftwidth=3
+set noexpandtab
+set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=%l,%c%V%8P
 "}}}
 

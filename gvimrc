@@ -1,5 +1,5 @@
-"ƒJƒ‰[İ’è
-"ƒJƒ‰[İ’è‚µ‚½Œã‚ÉCursorIM‚ğ’è‹`‚·‚é•û–@
+"ã‚«ãƒ©ãƒ¼è¨­å®š
+"ã‚«ãƒ©ãƒ¼è¨­å®šã—ãŸå¾Œã«CursorIMã‚’å®šç¾©ã™ã‚‹æ–¹æ³•
 colorscheme murphy
 
 if has('multi_byte_ime')
@@ -12,7 +12,7 @@ set guioptions-=r
 set guioptions-=R
 set guioptions-=l
 set guioptions-=L
-set visualbel
+set visualbell
 
 if has('gui_macvim')
 	if has('gui_running')
