@@ -30,6 +30,7 @@ NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/vinarise'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tsukkee/unite-tag'
+NeoBundle 'tyru/open-browser.vim'
 "}}}
 "===============================================================================
 
@@ -105,3 +106,10 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType vim setlocal omnifunc=complete#CompleteCSS
 "}}}
 
+"===============================================================================
+" QuickRun
+let g:quickrun_config = {}
+let g:quickrun_config['markdown'] = {
+      \ 'type': 'markdown/redcarpet',
+      \ 'outputter': 'browser'
+      \ }
