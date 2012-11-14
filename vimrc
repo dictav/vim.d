@@ -31,6 +31,7 @@ NeoBundle 'Shougo/vinarise'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'h1mesuke/unite-outline'
 "}}}
 "===============================================================================
 
