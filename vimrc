@@ -112,6 +112,7 @@ autocmd FileType vim setlocal omnifunc=complete#CompleteCSS
 let g:quickrun_config = {}
 let g:quickrun_config['markdown'] = {
       \ 'type': 'markdown/redcarpet',
+      \ 'cmdopt': '--parse-fenced_code_blocks --parse-autolink',
       \ 'outputter': 'browser'
       \ }
 
