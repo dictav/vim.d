@@ -32,6 +32,10 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'noahlh/html5.vim'
+NeoBundle 'othree/eregex.vim'
+NeoBundle 'mattn/zencoding-vim'
 "}}}
 "===============================================================================
 
@@ -130,3 +134,10 @@ smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" 
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
+"===============================================================================
+" eregex
+nnoremap / :M/
+nnoremap ? :M?
+nnoremap ,/ /
+nnoremap ,? ?
