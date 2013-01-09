@@ -88,6 +88,8 @@ if has('persistent_undo')
     set undodir=~/.vim/tmp
     set undofile
 endif
+
+
 "}}}
 
 "===============================================================================
@@ -167,8 +169,6 @@ augroup RSpec
    autocmd!
    autocmd BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
    autocmd BufReadPost *_spec.rb call RSpecSyntax()
-   "autocmd BufRead *_spec.rb syn keyword rubyRspec describe context it specify it_should_behave_like before after setup subject its shared_examples_for shared_context let
-   "highlight def link rubyRspec Function
 augroup END
 
 
@@ -178,5 +178,125 @@ let g:quickrun_config['ruby.rspec'] = {
 	 \ 'cmdopt': '-fs --color -I.',
 	 \ 'outputter/buffer/filetype': 'rspec-result'
 	 \}
+
+
+"===============================================================================
+" Tumblr
+"let s:tumblr_app_host = "http://localhost:5000/"
+let s:tumblr_app_host = "http://tumblr-app.herokuapp.com/"
+let s:tumblr_app_token = "QELkJjkgUsDLMaHJh4DR16uC3kCEUHK2RXhNFv4I6GcU5GVAtb"
+let s:tumblr_app_blog = "diclog"
+let s:tumblr_app_html_format = ""
+	 \.'<!DOCTYPE HTML>'
+	 \.'<html lang="en">'
+	 \.'<head>'
+	 \.'   <meta charset="UTF-8">'
+	 \.'   <title>PUT TEST</title>'
+	 \.'   <script type="text/javascript">'
+	 \.'      window.onload = function () {'
+	 \.'	 form = document.getElementById("form");'
+	 \.'	 form.submit();'
+	 \.'      }'
+	 \.'   </script>'
+	 \.'</head>'
+	 \.'<body>'
+	 \.'   <form id="form" action="__ACTION__" method="post">'
+	 \.'      <input type="hidden" name="title" value="__TITLE__">'
+	 \.'      <input type="hidden" name="body" value="__BODY__">'
+	 \.'   </form>'
+	 \.'</body>'
+	 \.'</html>'
+
+function! TumblrAuth()
+   call openbrowser#open(s:tumblr_app_host)
+endfunction
+
+function! TumblrRequestPost(action, title, body)
+   let action = [s:tumblr_app_host, s:tumblr_app_blog, a:action]
+   let html = s:tumblr_app_html_format
+   let html = substitute(html, "__ACTION__", join(action, "/"), '')
+   let html = substitute(html, "__TITLE__", a:title, '')
+   let html = substitute(html, "__BODY__", a:body, '')
+   let file_path = tempname().".html"
+   call writefile([html], file_path,'')
+   let saved = g:openbrowser_open_filepath_in_vim
+   try
+      let g:openbrowser_open_filepath_in_vim = 0
+      call openbrowser#open(file_path)
+   finally
+      let g:openbrowser_open_filepath_in_vim = saved
+   endtry
+endfunction
+
+function! TumblrRequestGet(action)
+   let action = [s:tumblr_app_host, s:tumblr_app_token, s:tumblr_app_blog, a:action]
+   let null = "null"
+   let false = "false"
+   let true = "true"
+   let cmd_curl = "curl -s ".join(action, "/")
+   echo "operationg(".a:action.")... ".cmd_curl
+   let json = system(cmd_curl)
+   "echo json
+   return eval(json)
+endfunction
+
+function! TumblrCreatePost()
+   let title = getline(1)
+   let lines = join(getline(2, line("$")), "\r")
+   call TumblrRequestPost('new', title, lines)
+endfunction
+
+function! TumblrUpdatePost(id)
+   let title = getline(1)
+   let lines = join(getline(2, line("$")), "\r")
+   call TumblrRequestPost(a:id.'/update', title, lines)
+endfunction
+
+function! TumblrCreateDraft()
+endfunction
+
+function! TumblrUpdateDraft(id)
+endfunction
+
+function! TumblrReadPost(id)
+   new
+   let b:blog = TumblrRequestGet(a:id)
+   exec "set filetype=".b:blog.format
+   let body = b:blog.body
+   call append(0, split(body, "\n", 1))
+endfunction
+
+function! TumblrReadPostTitles()
+   return TumblrRequestGet("posts")
+endfunction
+
+function! TumlrReadDraftTitles()
+   return TumblrRequestGet("drafts")
+endfunction
+
+" {"word": "auth"
+" {"word": "posts"
+" {"word": "drafts"
+" {"word": "clear token"
+
+
+let s:unite_source = {
+	 \   'name': 'tumblr',
+	 \ }
+
+function! s:unite_source.gather_candidates(args, context)
+   let lines = TumblrReadPostTitles()
+   let rtn = map(lines, '{
+	    \ "word": v:val,
+	    \ "source": "tumblr",
+	    \ "kind": "command",
+	    \ "action__command": "call TumblrReadPost(\"".v:key."\")",
+	    \ }')
+   "echo values(rtn)
+   return values(rtn)
+endfunction
+
+call unite#define_source(s:unite_source)
+unlet s:unite_source
 
 
