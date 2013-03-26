@@ -1,6 +1,6 @@
 "カラー設定
 "カラー設定した後にCursorIMを定義する方法
-colorscheme murphy
+colorscheme railscasts
 
 if has('multi_byte_ime')
 	highlight CursorIM guifg=NONE guibg=lightyellow

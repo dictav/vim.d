@@ -37,6 +37,13 @@ NeoBundle 'noahlh/html5.vim'
 NeoBundle 'othree/eregex.vim'
 NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'CSApprox'
+NeoBundle 'vim-ruby/vim-ruby'
+" syntax + 自動compile
+NeoBundle 'kchmck/vim-coffee-script'
+" js BDDツール
+NeoBundle 'claco/jasmine.vim'
+" indentの深さに色を付ける
+NeoBundle 'nathanaelkane/vim-indent-guides'
 "}}}
 "===============================================================================
 
@@ -77,7 +84,7 @@ endfunction
 "===============================================================================
 " 設定
 "{{{
-colorscheme murphy
+colorscheme railscasts
 syntax on
 set directory=~/.vim/tmp
 set backupdir=~/.vim/tmp
@@ -128,7 +135,7 @@ let g:quickrun_config._ = {
 	 \}
 let g:quickrun_config['markdown'] = {
 	 \ 'type': 'markdown/redcarpet',
-	 \ 'cmdopt': '--parse-fenced_code_blocks --parse-autolink',
+	 \ 'cmdopt': '--parse-fenced_code_blocks --parse-autolink --parse-tables',
 	 \ 'outputter': 'browser'
 	 \ }
 
@@ -187,38 +194,54 @@ let s:tumblr_app_host = "http://tumblr-app.herokuapp.com/"
 let s:tumblr_app_token = "QELkJjkgUsDLMaHJh4DR16uC3kCEUHK2RXhNFv4I6GcU5GVAtb"
 let s:tumblr_app_blog = "diclog"
 let s:tumblr_app_html_format = ""
-	 \.'<!DOCTYPE HTML>'
-	 \.'<html lang="en">'
-	 \.'<head>'
-	 \.'   <meta charset="UTF-8">'
-	 \.'   <title>PUT TEST</title>'
-	 \.'   <script type="text/javascript">'
-	 \.'      window.onload = function () {'
-	 \.'	 form = document.getElementById("form");'
-	 \.'	 form.submit();'
-	 \.'      }'
-	 \.'   </script>'
-	 \.'</head>'
-	 \.'<body>'
-	 \.'   <form id="form" action="__ACTION__" method="post">'
-	 \.'      <input type="hidden" name="title" value="__TITLE__">'
-	 \.'      <input type="hidden" name="body" value="__BODY__">'
-	 \.'   </form>'
-	 \.'</body>'
-	 \.'</html>'
+	 \."<!DOCTYPE HTML>"
+	 \."<html lang='en'>"
+	 \."<head>"
+	 \."   <meta charset='UTF-8'>"
+	 \."   <title>PUT TEST</title>"
+	 \."   <script type='text/javascript'>"
+	 \."   window.onload = function () {"
+	 \."	  form = document.createElement('form');"
+	 \."	  form.action = '__ACTION__';"
+	 \."	  form.method = 'post';"
+	 \."      inputs = __INPUTS__;"
+	 \."	  for (key in inputs) {"
+	 \."	     input = document.createElement('input');"
+	 \."	     input.type = 'hidden';"
+	 \."	     input.name = key;"
+	 \."	     val = inputs[key];"
+	 \."	     val=val.replace(/__LT__/g,'<');"
+	 \."	     val=val.replace(/__GT__/g,'>');"
+	 \."	     input.value = val;"
+	 \."	     form.appendChild(input);"
+	 \."	  };"
+	 \."	  form.submit();"
+	 \."   }"
+	 \."   </script>"
+	 \."</head>"
+	 \."<body>"
+	 \."<h1>Loading...</h1>"
+	 \."</body>"
+	 \."</html>"
 
 function! TumblrAuth()
    call openbrowser#open(s:tumblr_app_host)
 endfunction
 
-function! TumblrRequestPost(action, title, body)
+function! TumblrRequestPost(action, params)
    let action = [s:tumblr_app_host, s:tumblr_app_blog, a:action]
    let html = s:tumblr_app_html_format
    let html = substitute(html, "__ACTION__", join(action, "/"), '')
-   let html = substitute(html, "__TITLE__", a:title, '')
-   let html = substitute(html, "__BODY__", a:body, '')
+   let eol = '\\\\n'
+   let params = map(a:params, "substitute(v:val, '<', '__LT__', 'g')")
+   let params = map(params, "substitute(v:val, '>', '__GT__', 'g')")
+   let params = map(params, "substitute(v:val, '\\r', '".eol."', 'g')")
+
+   let html = substitute(html, "__INPUTS__", string(params), '')
+
    let file_path = tempname().".html"
    call writefile([html], file_path,'')
+   exec "sp ".file_path
    let saved = g:openbrowser_open_filepath_in_vim
    try
       let g:openbrowser_open_filepath_in_vim = 0
@@ -234,22 +257,33 @@ function! TumblrRequestGet(action)
    let false = "false"
    let true = "true"
    let cmd_curl = "curl -s ".join(action, "/")
-   echo "operationg(".a:action.")... ".cmd_curl
+   echo "operating(".a:action.")... ".cmd_curl
    let json = system(cmd_curl)
    "echo json
    return eval(json)
 endfunction
 
 function! TumblrCreatePost()
-   let title = getline(1)
-   let lines = join(getline(2, line("$")), "\r")
-   call TumblrRequestPost('new', title, lines)
+   "let title = getline(1)
+   "let lines = join(getline(2, line("$")), "\r")
+   let params = {
+	    \ "title": getline(1),
+	    \ "body":join(getline(2, line("$")), "\r"),
+	    \ "format": &filetype
+	    \}
+   
+   call TumblrRequestPost('new', params)
 endfunction
 
 function! TumblrUpdatePost(id)
-   let title = getline(1)
-   let lines = join(getline(2, line("$")), "\r")
-   call TumblrRequestPost(a:id.'/update', title, lines)
+"   let title = getline(1)
+"   let lines = join(getline(2, line("$")), "\r")
+   let params = {
+	    \"title": getline(1),
+	    \ "body":join(getline(2, line("$")), "\r")
+	    \}
+   call TumblrRequestPost(a:id.'/update', params)
+})
 endfunction
 
 function! TumblrCreateDraft()
@@ -300,3 +334,7 @@ call unite#define_source(s:unite_source)
 unlet s:unite_source
 
 
+"===============================================================================
+" CoffeeScript
+" インデントを設定
+autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
