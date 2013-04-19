@@ -44,6 +44,8 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'claco/jasmine.vim'
 " indentの深さに色を付ける
 NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'teramako/jscomplete-vim'
+NeoBundle 'jquery'
 "}}}
 "===============================================================================
 

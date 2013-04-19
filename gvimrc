@@ -21,3 +21,7 @@ if has('gui_macvim')
  		highlight CursorIM guifg=NONE guibg=lightyellow
 	endif
 endif
+
+winpos  750 0
+winsize 85 100
+

@@ -26,7 +26,8 @@ hi Cursor     guibg=#FFFFFF
 hi CursorLine guibg=#333435
 hi LineNr     guifg=#666666
 hi Visual     guibg=#5A647E
-hi Search     guifg=NONE    guibg=#131313  gui=NONE
+"hi Search     guifg=NONE    guibg=#131313  gui=NONE
+hi Search     guifg=#FF0000    guibg=#00FF00  gui=NONE
 hi Folded     guifg=#F6F3E8 guibg=#444444  gui=NONE
 hi Directory  guifg=#A5C160 gui=NONE
 hi Error      guifg=#FFFFFF guibg=#990000
