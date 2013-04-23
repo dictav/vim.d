@@ -32,7 +32,6 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'othree/html5.vim'
 NeoBundle 'noahlh/html5.vim'
 NeoBundle 'othree/eregex.vim'
 NeoBundle 'mattn/zencoding-vim'
@@ -45,7 +44,10 @@ NeoBundle 'claco/jasmine.vim'
 " indentの深さに色を付ける
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'teramako/jscomplete-vim'
-NeoBundle 'jquery'
+NeoBundle 'ujihisa/shadow.vim'
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'tpope/vim-surround'
+
 "}}}
 "===============================================================================
 
@@ -125,6 +127,12 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType vim setlocal omnifunc=complete#CompleteCSS
+
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'coffee' : $HOME.'/.vim/dict/javascript.dict'
+    \ }
 "}}}
 
 "===============================================================================
