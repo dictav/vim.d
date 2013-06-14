@@ -1,5 +1,6 @@
 lang ja_JP
 set encoding=utf-8
+set shell=/bin/bash
 
 "===============================================================================
 " NeoBundle
@@ -28,6 +29,7 @@ NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/vinarise'
+NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'tyru/open-browser.vim'
@@ -47,6 +49,7 @@ NeoBundle 'teramako/jscomplete-vim'
 NeoBundle 'ujihisa/shadow.vim'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'kien/ctrlp.vim'
 
 "}}}
 "===============================================================================
@@ -94,7 +97,7 @@ set directory=~/.vim/tmp
 set backupdir=~/.vim/tmp
 set tabstop=8 softtabstop=3 shiftwidth=3
 set noexpandtab
-set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=%l,%c%V%8P
+set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=%l,%c%V%8P
 if has('persistent_undo')
     set undodir=~/.vim/tmp
     set undofile
@@ -122,7 +125,7 @@ smap <C-k> <Plug>(neocomplcache_snippets_expand)
 
 " Enable omni completion.
 autocmd FileType perl setlocal omnifunc=perlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete softtabstop=2 shiftwidth=2
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -348,3 +351,8 @@ unlet s:unite_source
 " CoffeeScript
 " インデントを設定
 autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
+
+"===============================================================================
+" VimFiler
+" デフォルトに設定
+let g:vimfiler_as_default_explorer = 1
