@@ -97,7 +97,7 @@ colorscheme railscasts
 syntax on
 set directory=~/.vim/tmp
 set backupdir=~/.vim/tmp
-set tabstop=8 softtabstop=3 shiftwidth=3
+set tabstop=4 shiftwidth=4 softtabstop=0
 set noexpandtab
 set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=%l,%c%V%8P
 if has('persistent_undo')
@@ -126,7 +126,7 @@ smap <C-k> <Plug>(neocomplcache_snippets_expand)
 
 " Enable omni completion.
 autocmd FileType perl setlocal omnifunc=perlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete softtabstop=2 shiftwidth=2
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete tabstop=2 shiftwidth=2
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
