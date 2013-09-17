@@ -35,10 +35,7 @@ NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'noahlh/html5.vim'
-NeoBundle 'othree/eregex.vim'
-NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'CSApprox'
-NeoBundle 'vim-ruby/vim-ruby'
 " syntax + 自動compile
 NeoBundle 'kchmck/vim-coffee-script'
 " js BDDツール
@@ -50,6 +47,8 @@ NeoBundle 'ujihisa/shadow.vim'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'kien/ctrlp.vim'
+" ruby
+NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'Keithbsmiley/rspec.vim'
 NeoBundle 'mattn/sonictemplate-vim'
 NeoBundle 'itchyny/lightline.vim'
@@ -151,13 +150,6 @@ smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" 
 if has('conceal')
    set conceallevel=2 concealcursor=i
 endif
-
-"===============================================================================
-" eregex
-nnoremap / :M/
-nnoremap ? :M?
-nnoremap ,/ /
-nnoremap ,? ?
 
 "===============================================================================
 " RSpec
