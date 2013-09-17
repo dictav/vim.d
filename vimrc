@@ -52,42 +52,22 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'Keithbsmiley/rspec.vim'
 NeoBundle 'mattn/sonictemplate-vim'
+NeoBundle 'itchyny/lightline.vim'
 
 "}}}
 "===============================================================================
 
 "===============================================================================
-"=インサートモードに入ったときにステータスラインの色を変える
+" lightline
 "{{{
-if has('syntax')
-   augroup InsertHook
-      " 現在のグループに対する「全て」の自動コマンドを削除。
-      autocmd!
-      autocmd InsertEnter * call s:StatusLine('Enter')
-      autocmd InsertLeave * call s:StatusLine('Leave')
-   augroup END
-endif
-
-let s:slhlcmd = ''
-function! s:StatusLine(mode)
-   if a:mode == 'Enter'
-      silent! let s:slhlcmd = 'highlight ' . s:GetStatusLineHighlight()
-      let cmd = 'hi StatusLine gui=None guifg=Black guibg=Green cterm=None ctermfg=Black ctermbg=Green'
-      silent exec cmd
-   else
-      highlight clear StatusLine
-      silent exec s:slhlcmd
-   endif
-endfunction
-
-function! s:GetStatusLineHighlight()
-   redir => hl
-   exec 'highlight StatusLine'
-   redir END
-   let hl = substitute(hl, '[\r\n]', '', 'g')
-   let hl = substitute(hl, 'xxx', '', '')
-   return hl
-endfunction
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"⭤":""}',
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
 "}}}
 
 "===============================================================================
@@ -99,7 +79,7 @@ set directory=~/.vim/tmp
 set backupdir=~/.vim/tmp
 set tabstop=4 shiftwidth=4 softtabstop=0
 set noexpandtab
-set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=%l,%c%V%8P
+"set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=%l,%c%V%8P
 if has('persistent_undo')
     set undodir=~/.vim/tmp
     set undofile
