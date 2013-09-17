@@ -51,6 +51,7 @@ NeoBundle 'groenewege/vim-less'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'Keithbsmiley/rspec.vim'
+NeoBundle 'mattn/sonictemplate-vim'
 
 "}}}
 "===============================================================================
@@ -112,10 +113,9 @@ endif
 "{{{
 let g:neocomplcache_enable_at_startup = 1
 " Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-   let g:neocomplcache_keyword_patterns = {}
-endif
+let g:neocomplcache_keyword_patterns = {}
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+let g:neocomplcache_omni_patterns = {}
 
 "" <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -350,3 +350,11 @@ autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 " VimFiler
 " デフォルトに設定
 let g:vimfiler_as_default_explorer = 1
+
+"===============================================================================
+" Go
+set rtp+=$GOROOT/misc/vim
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+set completeopt=menu,preview
+let g:neocomplcache_omni_patterns.go = '\h\w*\.\?'
+auto BufWritePre *.go Fmt
