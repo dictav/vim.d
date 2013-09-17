@@ -25,7 +25,7 @@ NeoBundle 'Shougo/vimproc', {
 	 \},
 	 \}
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/vinarise'
@@ -89,20 +89,20 @@ endif
 "}}}
 
 "===============================================================================
-" Neocomplecache
+" Neocomplete
 "{{{
-let g:neocomplcache_enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 1
 " Define keyword.
-let g:neocomplcache_keyword_patterns = {}
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-let g:neocomplcache_omni_patterns = {}
+let g:neocomplete#keyword_patterns = {}
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+let g:neocomplete#omni_patterns = {}
 
 "" <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 "
 "" Snippets expand
-imap <expr><C-k> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-o>D"
-smap <C-k> <Plug>(neocomplcache_snippets_expand)
+imap <expr><C-k> neocomplete#sources#snippets_complete#expandable() ? "\<Plug>(neocomplete#snippets_expand)" : "\<C-o>D"
+smap <C-k> <Plug>(neocomplete#snippets_expand)
 
 " Enable omni completion.
 autocmd FileType perl setlocal omnifunc=perlcomplete#CompleteTags
@@ -112,7 +112,7 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType vim setlocal omnifunc=complete#CompleteCSS
 
-let g:neocomplcache_dictionary_filetype_lists = {
+let g:neocomplete#dictionary_filetype_lists = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'coffee' : $HOME.'/.vim/dict/javascript.dict'
@@ -188,5 +188,5 @@ let g:vimfiler_as_default_explorer = 1
 set rtp+=$GOROOT/misc/vim
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 set completeopt=menu,preview
-let g:neocomplcache_omni_patterns.go = '\h\w*\.\?'
+let g:neocomplete#omni_patterns.go = '\h\w*\.\?'
 auto BufWritePre *.go Fmt
