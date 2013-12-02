@@ -96,3 +96,6 @@ hi PMenuSbar guibg=#5A647E gui=NONE
 " thumb of the scrollbar in the popup
 hi PMenuThumb guibg=#AAAAAA gui=NONE
 
+" Sign Column
+" -----------
+hi SignColumn     guifg=#E6E1DC guibg=#232323

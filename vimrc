@@ -52,7 +52,7 @@ NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'Keithbsmiley/rspec.vim'
 NeoBundle 'mattn/sonictemplate-vim'
 NeoBundle 'itchyny/lightline.vim'
-
+NeoBundle 'airblade/vim-gitgutter'
 "}}}
 "===============================================================================
 
@@ -78,7 +78,7 @@ set directory=~/.vim/tmp
 set backupdir=~/.vim/tmp
 set tabstop=4 shiftwidth=4 softtabstop=0
 set noexpandtab
-"set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=%l,%c%V%8P
+set number
 if has('persistent_undo')
     set undodir=~/.vim/tmp
     set undofile
@@ -182,3 +182,14 @@ exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 set completeopt=menu,preview
 let g:neocomplete#omni_patterns.go = '\h\w*\.\?'
 auto BufWritePre *.go Fmt
+
+
+"===============================================================================
+" CtrlP
+let g:ctrlp_use_migemo = 1
+
+"===============================================================================
+" GitGutter
+let g:gitgutter_enabled = 1
+autocmd BufEnter * sign define dummy
+autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
