@@ -24,35 +24,38 @@ NeoBundle 'Shougo/vimproc', {
 	 \  'unix' : 'make -f make_unix.mak',
 	 \},
 	 \}
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplete'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/vinarise'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'tsukkee/unite-tag'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'noahlh/html5.vim'
+NeoBundleLazy 'Shougo/unite.vim'
+NeoBundleLazy 'Shougo/neocomplete'
+NeoBundleLazy 'Shougo/neosnippet'
+NeoBundleLazy 'Shougo/vimshell'
+NeoBundleLazy 'Shougo/vinarise'
+NeoBundleLazy 'Shougo/vimfiler.vim'
+NeoBundleLazy 'thinca/vim-quickrun'
+NeoBundleLazy 'tsukkee/unite-tag'
+NeoBundleLazy 'tyru/open-browser.vim'
+NeoBundleLazy 'h1mesuke/unite-outline'
+NeoBundleLazy 'noahlh/html5.vim'
 NeoBundle 'CSApprox'
 " syntax + 自動compile
-NeoBundle 'kchmck/vim-coffee-script'
+NeoBundleLazy 'kchmck/vim-coffee-script'
 " js BDDツール
-NeoBundle 'claco/jasmine.vim'
+NeoBundleLazy 'claco/jasmine.vim'
 " indentの深さに色を付ける
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'teramako/jscomplete-vim'
-NeoBundle 'ujihisa/shadow.vim'
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'kien/ctrlp.vim'
+NeoBundleLazy 'nathanaelkane/vim-indent-guides'
+NeoBundleLazy 'ujihisa/shadow.vim'
+NeoBundleLazy 'groenewege/vim-less'
+NeoBundleLazy 'tpope/vim-surround'
+NeoBundleLazy 'kien/ctrlp.vim'
 " ruby
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'Keithbsmiley/rspec.vim'
-NeoBundle 'mattn/sonictemplate-vim'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'airblade/vim-gitgutter'
+NeoBundleLazy 'vim-ruby/vim-ruby'
+NeoBundleLazy 'Keithbsmiley/rspec.vim'
+" other
+NeoBundleLazy 'mattn/sonictemplate-vim'
+NeoBundleLazy 'itchyny/lightline.vim'
+NeoBundleLazy 'airblade/vim-gitgutter'
+NeoBundleLazy 'Blackrush/vim-gocode', {"autoload": {"filetypes": ['go']}}
+NeoBundleLazy 'dgryski/vim-godef'
+NeoBundleLazy 'kannokanno/previm'
 "}}}
 "===============================================================================
 
@@ -179,6 +182,7 @@ let g:vimfiler_as_default_explorer = 1
 " Go
 set rtp+=$GOROOT/misc/vim
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+exe "set rtp+=".globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
 set completeopt=menu,preview
 let g:neocomplete#omni_patterns.go = '\h\w*\.\?'
 auto BufWritePre *.go Fmt
