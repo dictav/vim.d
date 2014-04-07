@@ -24,38 +24,43 @@ NeoBundle 'Shougo/vimproc', {
 	 \  'unix' : 'make -f make_unix.mak',
 	 \},
 	 \}
-NeoBundleLazy 'Shougo/unite.vim'
-NeoBundleLazy 'Shougo/neocomplete'
-NeoBundleLazy 'Shougo/neosnippet'
-NeoBundleLazy 'Shougo/vimshell'
-NeoBundleLazy 'Shougo/vinarise'
-NeoBundleLazy 'Shougo/vimfiler.vim'
-NeoBundleLazy 'thinca/vim-quickrun'
-NeoBundleLazy 'tsukkee/unite-tag'
-NeoBundleLazy 'tyru/open-browser.vim'
-NeoBundleLazy 'h1mesuke/unite-outline'
-NeoBundleLazy 'noahlh/html5.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neocomplete'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vinarise'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'tsukkee/unite-tag'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'noahlh/html5.vim'
 NeoBundle 'CSApprox'
 " syntax + 自動compile
-NeoBundleLazy 'kchmck/vim-coffee-script'
+NeoBundle 'kchmck/vim-coffee-script'
 " js BDDツール
-NeoBundleLazy 'claco/jasmine.vim'
+NeoBundle 'claco/jasmine.vim'
 " indentの深さに色を付ける
-NeoBundleLazy 'nathanaelkane/vim-indent-guides'
-NeoBundleLazy 'ujihisa/shadow.vim'
-NeoBundleLazy 'groenewege/vim-less'
-NeoBundleLazy 'tpope/vim-surround'
-NeoBundleLazy 'kien/ctrlp.vim'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'ujihisa/shadow.vim'
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'kien/ctrlp.vim'
 " ruby
-NeoBundleLazy 'vim-ruby/vim-ruby'
-NeoBundleLazy 'Keithbsmiley/rspec.vim'
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'Keithbsmiley/rspec.vim'
 " other
-NeoBundleLazy 'mattn/sonictemplate-vim'
-NeoBundleLazy 'itchyny/lightline.vim'
-NeoBundleLazy 'airblade/vim-gitgutter'
-NeoBundleLazy 'Blackrush/vim-gocode', {"autoload": {"filetypes": ['go']}}
-NeoBundleLazy 'dgryski/vim-godef'
-NeoBundleLazy 'kannokanno/previm'
+NeoBundle 'mattn/sonictemplate-vim'
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'Blackrush/vim-gocode', {"autoload": {"filetypes": ['go']}}
+NeoBundle 'dgryski/vim-godef'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'vim-jp/vital.vim'
+
+" jekyll
+NeoBundle 'csexton/jekyll.vim'
+let g:jekyll_path = "~/Works/dictav.github.com/"
 "}}}
 "===============================================================================
 
@@ -197,3 +202,37 @@ let g:ctrlp_use_migemo = 1
 let g:gitgutter_enabled = 1
 autocmd BufEnter * sign define dummy
 autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+
+
+"===============================================================================
+" Objective-C 
+let g:quickrun_config['objc'] = {
+\   'command': 'clang',
+\	'cmdopt': '-framework Foundation',
+\   'exec': ['%c %o %s -o %s:p:r', '%s:p:r %a'],
+\   'tempfile': '%{tempname()}.m',
+\   'hook/sweep/files': '%S:p:r',
+\ }
+
+"===============================================================================
+" submode 
+NeoBundle "kana/vim-submode"
+call submode#enter_with('winsize', 'n', '', '<C-w>>', '<C-w>>')
+call submode#enter_with('winsize', 'n', '', '<C-w><', '<C-w><')
+call submode#enter_with('winsize', 'n', '', '<C-w>+', '<C-w>-')
+call submode#enter_with('winsize', 'n', '', '<C-w>-', '<C-w>+')
+call submode#map('winsize', 'n', '', '>', '<C-w>>')
+call submode#map('winsize', 'n', '', '<', '<C-w><')
+call submode#map('winsize', 'n', '', '+', '<C-w>-')
+call submode#map('winsize', 'n', '', '-', '<C-w>+')
+
+"===============================================================================
+" TwilioCall
+NeoBundle 'twiliocall-vim', {
+			\ "type" : "nosync",
+			\}
+
+let g:twiliocall_from = '+17402744226'
+let g:twiliocall_sid = 'AC996ac19dd791add3ff7437c62bbe0fc3'
+let g:twiliocall_auth_token = 'a4613c5c26cfa9803eceb13fa127d1c8'
+
