@@ -24,62 +24,72 @@ NeoBundle 'Shougo/vimproc', {
 	 \  'unix' : 'make -f make_unix.mak',
 	 \},
 	 \}
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/vinarise'
 NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'thinca/vim-quickrun'
+" Unite
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'tsukkee/unite-tag'
-NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'noahlh/html5.vim'
+NeoBundle "osyo-manga/unite-quickfix"
+
+" QuickRun
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle "osyo-manga/shabadou.vim"
+NeoBundle 'tyru/open-browser.vim'
+
+" Make gvim-only colorschemes work transparently in terminal vim 
 NeoBundle 'CSApprox'
-" syntax + 自動compile
-NeoBundle 'kchmck/vim-coffee-script'
-" js BDDツール
-NeoBundle 'claco/jasmine.vim'
 " indentの深さに色を付ける
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'ujihisa/shadow.vim'
-NeoBundle 'groenewege/vim-less'
+let g:indent_guides_enable_on_vim_startup = 1
+"
 NeoBundle 'tpope/vim-surround'
+
+" CtrlP
 NeoBundle 'kien/ctrlp.vim'
-" ruby
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'Keithbsmiley/rspec.vim'
-" other
+NeoBundle 'tacahiroy/ctrlp-funky'
+NeoBundle 'sgur/ctrlp-extensions.vim'
+let g:ctrlp_extensions = ['funky']
+" Prefix: s
+nnoremap [CtrlP] <Nop>
+nmap <C-p> [CtrlP]
+nnoremap [CtrlP]p :<C-u>CtrlP<CR>
+nnoremap [CtrlP]b :<C-u>CtrlPBuffer<CR>
+nnoremap [CtrlP]f :<C-u>CtrlPFunky<CR>
+nnoremap [CtrlP]l :<C-u>CtrlPLine<CR>
+nnoremap [CtrlP]m :<C-u>CtrlPMRUFiles<CR>
+nnoremap [CtrlP]q :<C-u>CtrlPQuickfix<CR>
+nnoremap [CtrlP]s :<C-u>CtrlPMixed<CR>
+nnoremap [CtrlP]t :<C-u>CtrlPTag<CR>
+
+let g:ctrlp_map = '<Nop>'
+" Guess vcs root dir
+let g:ctrlp_working_path_mode = 'ra'
+" Open new file in current window
+let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_extensions = ['menu', 'funky', 'tag', 'quickfix', 'dir', 'line', 'mixed']
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:18'
+
+" Template 
 NeoBundle 'mattn/sonictemplate-vim'
-NeoBundle 'itchyny/lightline.vim'
+" GitGutter
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'Blackrush/vim-gocode', {"autoload": {"filetypes": ['go']}}
-NeoBundle 'dgryski/vim-godef'
-NeoBundle 'kannokanno/previm'
+" Vital!
 NeoBundle 'vim-jp/vital.vim'
 
-" jekyll
-NeoBundle 'csexton/jekyll.vim'
-let g:jekyll_path = "~/Works/dictav.github.com/"
-"}}}
-"===============================================================================
 
-"===============================================================================
-" lightline
-"{{{
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'component': {
-      \   'readonly': '%{&readonly?"⭤":""}',
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-      \ }
-"}}}
+"runtime! conf.d/*.vim
+"runtime! conf.d/ruby.vimrc
+runtime conf.d/lightline.vimrc
+autocmd BufWinEnter *.rb runtime conf.d/ruby.vimrc
+
+
+
 
 "===============================================================================
 " 設定
-"{{{
 colorscheme railscasts
 syntax on
 set directory=~/.vim/tmp
@@ -87,13 +97,16 @@ set backupdir=~/.vim/tmp
 set tabstop=4 shiftwidth=4 softtabstop=0
 set noexpandtab
 set number
+set showcmd
 if has('persistent_undo')
     set undodir=~/.vim/tmp
     set undofile
 endif
 
-
-"}}}
+nnoremap [vimrc] <Nop>
+nmap <Space>, [vimrc]
+nnoremap [vimrc]t :<C-u>tabedit $MYVIMRC<CR>
+nnoremap [vimrc]s :<C-u>source $MYVIMRC<CR>
 
 "===============================================================================
 " Neocomplete
@@ -143,6 +156,9 @@ let g:quickrun_config.markdown = {
       \ 'args'      : 'Marked',
       \ 'exec'      : '%c %o %a %s',
       \ }
+let g:quickrun_config.ruby = {
+      \ 'cmdopt'    : '--test',
+      \ }
 
 "===============================================================================
 " NeoSnippet
@@ -159,38 +175,13 @@ if has('conceal')
    set conceallevel=2 concealcursor=i
 endif
 
-"===============================================================================
-" RSpec
 
-augroup RSpec
-  autocmd!
-  autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-augroup END
-
-let g:quickrun_config['ruby.rspec'] = {
-	 \ 'command': 'rspec',
-	 \ 'cmdopt': '-fs --color -I.',
-	 \ 'outputter/buffer/filetype': 'rspec-result'
-	 \}
-
-"===============================================================================
-" CoffeeScript
-" インデントを設定
-autocmd FileType coffee     setlocal ts=2 sw=2 et
 
 "===============================================================================
 " VimFiler
 " デフォルトに設定
 let g:vimfiler_as_default_explorer = 1
 
-"===============================================================================
-" Go
-set rtp+=$GOROOT/misc/vim
-exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-exe "set rtp+=".globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
-set completeopt=menu,preview
-let g:neocomplete#omni_patterns.go = '\h\w*\.\?'
-auto BufWritePre *.go Fmt
 
 
 "===============================================================================
