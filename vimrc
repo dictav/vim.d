@@ -24,7 +24,6 @@ NeoBundle 'Shougo/vimproc', {
 	 \  'unix' : 'make -f make_unix.mak',
 	 \},
 	 \}
-
 " VimFiler
 NeoBundle 'Shougo/vimfiler.vim'
 let g:vimfiler_as_default_explorer = 1
