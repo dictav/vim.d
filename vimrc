@@ -24,6 +24,8 @@ NeoBundle 'Shougo/vimproc', {
 	 \  'unix' : 'make -f make_unix.mak',
 	 \},
 	 \}
+
+
 " VimFiler
 NeoBundle 'Shougo/vimfiler.vim'
 let g:vimfiler_as_default_explorer = 1
@@ -45,17 +47,6 @@ autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('
 " Vital!
 NeoBundle 'vim-jp/vital.vim'
 
-
-"runtime! conf.d/*.vim
-runtime conf.d/lightline.vimrc
-runtime conf.d/ctrlp.vimrc
-runtime conf.d/key-mapping.vimrc
-runtime conf.d/submode.vimrc
-runtime conf.d/neocomplete.vimrc
-autocmd BufWinEnter *.rb runtime conf.d/ruby.vimrc
-autocmd BufWinEnter *.{c,cpp,m,h} runtime conf.d/objc.vimrc
-autocmd BufWinEnter *.go runtime conf.d/go.vimrc
-
 "===============================================================================
 " 設定
 colorscheme railscasts
@@ -70,3 +61,15 @@ if has('persistent_undo')
     set undodir=~/.vim/tmp
     set undofile
 endif
+
+"Import
+"runtime! conf.d/*.vim
+runtime conf.d/lightline.vimrc
+runtime conf.d/ctrlp.vimrc
+runtime conf.d/key-mapping.vimrc
+runtime conf.d/submode.vimrc
+runtime conf.d/neocomplete.vimrc
+autocmd BufWinEnter *.rb runtime conf.d/ruby.vimrc
+autocmd BufWinEnter *.{c,cpp,m,h} runtime conf.d/objc.vimrc
+autocmd BufWinEnter *.go runtime conf.d/go.vimrc
+
