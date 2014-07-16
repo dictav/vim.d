@@ -23,5 +23,5 @@ if has('gui_macvim')
 endif
 
 winpos  750 0
-winsize 85 100
+set lines=100 columns=85
 

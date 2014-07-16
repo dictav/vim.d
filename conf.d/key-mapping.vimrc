@@ -12,7 +12,10 @@ nnoremap [CtrlP]t :<C-u>CtrlPTag<CR>
 
 " VIMRC
 nnoremap [vimrc] <Nop>
-nmap <Space>, [vimrc]
+nmap <Space>. [vimrc]
 nnoremap [vimrc]t :<C-u>tabedit $MYVIMRC<CR>
 nnoremap [vimrc]s :<C-u>source $MYVIMRC<CR>
+nnoremap [vimrc]o :<C-u>edit $MYVIMRC<CR>
+nnoremap [vimrc]cd :<C-u>cd ~/.vim<CR>
 
+cmap <silent> tq :<C-u>tabclose<CR>

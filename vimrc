@@ -37,15 +37,28 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_enable_on_vim_startup = 1
 "
 NeoBundle 'tpope/vim-surround'
-" Template 
+NeoBundle 'tpope/vim-endwise'
 NeoBundle 'mattn/sonictemplate-vim'
-" GitGutter
-NeoBundle 'airblade/vim-gitgutter'
-let g:gitgutter_enabled = 1
-autocmd BufEnter * sign define dummy
-autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
-" Vital!
-NeoBundle 'vim-jp/vital.vim'
+NeoBundle "jceb/vim-hier"
+NeoBundle "dannyob/quickfixstatus"
+
+"Import
+runtime conf.d/lightline.vimrc
+runtime conf.d/ctrlp.vimrc
+runtime conf.d/key-mapping.vimrc
+runtime conf.d/submode.vimrc
+runtime conf.d/neocomplete.vimrc
+"runtime conf.d/bsla.vimrc
+runtime conf.d/quickrun.vimrc
+runtime conf.d/watchdogs.vimrc
+runtime conf.d/markdown.vimrc
+runtime conf.d/gitgutter.vimrc
+runtime conf.d/ultisnips.vimrc
+runtime conf.d/web.vimrc
+runtime conf.d/ruby.vimrc
+autocmd BufWinEnter *.{c,cpp,m,h} runtime conf.d/objc.vimrc
+"autocmd FileType go runtime conf.d/go.vimrc
+autocmd FileType vim runtime conf.d/vim.vimrc
 
 "===============================================================================
 " 設定
@@ -53,23 +66,13 @@ colorscheme railscasts
 syntax on
 set directory=~/.vim/tmp
 set backupdir=~/.vim/tmp
-set tabstop=4 shiftwidth=4 softtabstop=0
-set noexpandtab
+set tabstop=2 shiftwidth=2 softtabstop=0
+set expandtab
 set number
 set showcmd
 if has('persistent_undo')
-    set undodir=~/.vim/tmp
-    set undofile
+	set undodir=~/.vim/tmp
+	set undofile
 endif
-
-"Import
-"runtime! conf.d/*.vim
-runtime conf.d/lightline.vimrc
-runtime conf.d/ctrlp.vimrc
-runtime conf.d/key-mapping.vimrc
-runtime conf.d/submode.vimrc
-runtime conf.d/neocomplete.vimrc
-autocmd BufWinEnter *.rb runtime conf.d/ruby.vimrc
-autocmd BufWinEnter *.{c,cpp,m,h} runtime conf.d/objc.vimrc
-autocmd BufWinEnter *.go runtime conf.d/go.vimrc
+set laststatus=2
 
