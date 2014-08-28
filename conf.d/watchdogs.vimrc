@@ -1,4 +1,3 @@
-NeoBundle "osyo-manga/shabadou.vim"
 NeoBundle "osyo-manga/vim-watchdogs"
 
 " quickfix を閉じる

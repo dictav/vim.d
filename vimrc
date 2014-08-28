@@ -1,4 +1,5 @@
 lang ja_JP
+let &t_Co=256
 set encoding=utf-8
 set shell=/bin/bash
 
@@ -25,7 +26,6 @@ NeoBundle 'Shougo/vimproc', {
 	 \},
 	 \}
 
-
 " VimFiler
 NeoBundle 'Shougo/vimfiler.vim'
 let g:vimfiler_as_default_explorer = 1
@@ -39,7 +39,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'mattn/sonictemplate-vim'
-NeoBundle "jceb/vim-hier"
+NeoBundle "cohama/vim-hier"
 NeoBundle "dannyob/quickfixstatus"
 
 "Import
@@ -56,8 +56,8 @@ runtime conf.d/gitgutter.vimrc
 runtime conf.d/ultisnips.vimrc
 runtime conf.d/web.vimrc
 runtime conf.d/ruby.vimrc
-autocmd BufWinEnter *.{c,cpp,m,h} runtime conf.d/objc.vimrc
-"autocmd FileType go runtime conf.d/go.vimrc
+runtime conf.d/objc.vimrc
+runtime conf.d/go.vimrc
 autocmd FileType vim runtime conf.d/vim.vimrc
 
 "===============================================================================
@@ -75,4 +75,3 @@ if has('persistent_undo')
 	set undofile
 endif
 set laststatus=2
-

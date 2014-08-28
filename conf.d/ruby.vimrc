@@ -13,3 +13,7 @@ let g:quickrun_config["ruby/watchdogs_checker" ] = {
             \ "type" : "watchdogs_checker/rubocop"
             \}
 
+let g:quickrun_config["ruby.rspec/watchdogs_checker" ] = {
+            \ "type" : "watchdogs_checker/rubocop"
+            \}
+
