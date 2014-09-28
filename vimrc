@@ -48,7 +48,6 @@ runtime conf.d/ctrlp.vimrc
 runtime conf.d/key-mapping.vimrc
 runtime conf.d/submode.vimrc
 runtime conf.d/neocomplete.vimrc
-"runtime conf.d/bsla.vimrc
 runtime conf.d/quickrun.vimrc
 runtime conf.d/watchdogs.vimrc
 runtime conf.d/markdown.vimrc
@@ -58,7 +57,7 @@ runtime conf.d/web.vimrc
 runtime conf.d/ruby.vimrc
 runtime conf.d/objc.vimrc
 runtime conf.d/go.vimrc
-autocmd FileType vim runtime conf.d/vim.vimrc
+runtime conf.d/vim.vimrc
 
 "===============================================================================
 " 設定

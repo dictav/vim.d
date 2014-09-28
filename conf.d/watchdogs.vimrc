@@ -1,10 +1,8 @@
 NeoBundle "osyo-manga/vim-watchdogs"
 
 " quickfix を閉じる
-let g:quickrun_config = {
-\   "watchdogs_checker/_" : {
+let g:quickrun_config["watchdogs_checker/_"] = {
 \       "hook/close_quickfix/enable_exit" : 1,
-\   },
 \}
 
 " watchdogs.vim の設定を追加

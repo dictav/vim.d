@@ -4,7 +4,7 @@ let g:quickrun_config.markdown = {
       \ 'outputter' : 'null',
       \ 'command'   : 'open',
       \ 'cmdopt'    : '-a',
-      \ 'args'      : 'Marked',
+      \ 'args'      : 'Marked\ 2',
       \ 'exec'      : '%c %o %a %s',
       \ }
 

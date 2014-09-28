@@ -1,4 +1,6 @@
-NeoBundle 'noahlh/html5.vim'
+" JavaScript
+NeoBundle 'jelera/vim-javascript-syntax'
+" LESS
 NeoBundle 'groenewege/vim-less'
 " CoffeeScript's syntax + autocompile
 NeoBundle 'kchmck/vim-coffee-script'
