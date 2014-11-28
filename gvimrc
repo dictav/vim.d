@@ -23,5 +23,4 @@ if has('gui_macvim')
 endif
 
 winpos  2000 0
-set lines=100 columns=173 "80col x 2
-
+set lines=100 columns=86 "80col x 2
