@@ -26,10 +26,6 @@ NeoBundle 'Shougo/vimproc', {
 	 \},
 	 \}
 
-" VimFiler
-NeoBundle 'Shougo/vimfiler.vim'
-let g:vimfiler_as_default_explorer = 1
-
 " Make gvim-only colorschemes work transparently in terminal vim 
 NeoBundle 'CSApprox'
 " indentの深さに色を付ける
@@ -41,6 +37,8 @@ NeoBundle 'tpope/vim-endwise'
 NeoBundle 'mattn/sonictemplate-vim'
 NeoBundle "cohama/vim-hier"
 NeoBundle "dannyob/quickfixstatus"
+NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'gkz/vim-ls'
 
 "Import
 runtime conf.d/lightline.vimrc
@@ -52,12 +50,13 @@ runtime conf.d/quickrun.vimrc
 runtime conf.d/watchdogs.vimrc
 runtime conf.d/markdown.vimrc
 runtime conf.d/gitgutter.vimrc
-runtime conf.d/ultisnips.vimrc
+"runtime conf.d/ultisnips.vimrc
 runtime conf.d/web.vimrc
 runtime conf.d/ruby.vimrc
 runtime conf.d/objc.vimrc
 runtime conf.d/go.vimrc
 runtime conf.d/vim.vimrc
+NeoBundleCheck
 
 "===============================================================================
 " 設定
