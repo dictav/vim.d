@@ -1,6 +1,7 @@
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundle 'tyru/open-browser.vim'
+let g:openbrowser_browser_commands=[{'name': 'open', 'args': ['{browser}', '-g', '{uri}']}]
 let g:quickrun_config = {}
 let g:quickrun_config = {
       \	"_" : {
