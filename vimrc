@@ -17,7 +17,7 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc', {
+NeoBundle 'Shougo/vimproc.vim', {
 	 \'build' : {
 	 \   'windows' : 'echo "Sorry, cannot update vimproc binary file in Windows."',
 	 \  'cygwin' : 'make -f make_cygwin.mak',
@@ -47,7 +47,6 @@ runtime conf.d/key-mapping.vimrc
 runtime conf.d/submode.vimrc
 runtime conf.d/neocomplete.vimrc
 runtime conf.d/quickrun.vimrc
-runtime conf.d/watchdogs.vimrc
 runtime conf.d/markdown.vimrc
 runtime conf.d/gitgutter.vimrc
 "runtime conf.d/ultisnips.vimrc
@@ -56,6 +55,7 @@ runtime conf.d/ruby.vimrc
 runtime conf.d/objc.vimrc
 runtime conf.d/go.vimrc
 runtime conf.d/vim.vimrc
+runtime conf.d/watchdogs.vimrc
 NeoBundleCheck
 
 "===============================================================================
