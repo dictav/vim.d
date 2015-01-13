@@ -39,6 +39,10 @@ NeoBundle "cohama/vim-hier"
 NeoBundle "dannyob/quickfixstatus"
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'gkz/vim-ls'
+NeoBundle 'cohama/the-ocamlspot.vim'
+NeoBundle 'def-lkb/ocp-indent-vim'
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 "Import
 runtime conf.d/lightline.vimrc
