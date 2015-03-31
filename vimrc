@@ -44,6 +44,15 @@ NeoBundle 'def-lkb/ocp-indent-vim'
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
+" IDE
+NeoBundle 'junegunn/vim-easy-align'
+" Easy align interactive
+vnoremap <silent> <Enter> :EasyAlign<cr>
+
+NeoBundle 'rking/ag.vim'
+nmap ' :Ag <c-r>=expand("<cword>")<cr><cr>
+nnoremap <space>/ :Ag
+
 "Import
 runtime conf.d/lightline.vimrc
 runtime conf.d/ctrlp.vimrc
