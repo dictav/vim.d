@@ -1,4 +1,5 @@
 lang ja_JP
+let &t_Co=256
 set encoding=utf-8
 set shell=/bin/bash
 
@@ -16,7 +17,7 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc', {
+NeoBundle 'Shougo/vimproc.vim', {
 	 \'build' : {
 	 \   'windows' : 'echo "Sorry, cannot update vimproc binary file in Windows."',
 	 \  'cygwin' : 'make -f make_cygwin.mak',
@@ -24,215 +25,64 @@ NeoBundle 'Shougo/vimproc', {
 	 \  'unix' : 'make -f make_unix.mak',
 	 \},
 	 \}
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplete'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/vinarise'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'tsukkee/unite-tag'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'noahlh/html5.vim'
+
+" Make gvim-only colorschemes work transparently in terminal vim 
 NeoBundle 'CSApprox'
-" syntax + 自動compile
-NeoBundle 'kchmck/vim-coffee-script'
-" js BDDツール
-NeoBundle 'claco/jasmine.vim'
 " indentの深さに色を付ける
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'ujihisa/shadow.vim'
-NeoBundle 'groenewege/vim-less'
+let g:indent_guides_enable_on_vim_startup = 1
+"
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'kien/ctrlp.vim'
-" ruby
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'Keithbsmiley/rspec.vim'
-" other
+NeoBundle 'tpope/vim-endwise'
 NeoBundle 'mattn/sonictemplate-vim'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'Blackrush/vim-gocode', {"autoload": {"filetypes": ['go']}}
-NeoBundle 'dgryski/vim-godef'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'vim-jp/vital.vim'
+NeoBundle "cohama/vim-hier"
+NeoBundle "dannyob/quickfixstatus"
+NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'gkz/vim-ls'
+NeoBundle 'cohama/the-ocamlspot.vim'
+NeoBundle 'def-lkb/ocp-indent-vim'
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
-" jekyll
-NeoBundle 'csexton/jekyll.vim'
-let g:jekyll_path = "~/Works/dictav.github.com/"
-"}}}
-"===============================================================================
+" IDE
+NeoBundle 'junegunn/vim-easy-align'
+" Easy align interactive
+vnoremap <silent> <Enter> :EasyAlign<cr>
 
-"===============================================================================
-" lightline
-"{{{
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'component': {
-      \   'readonly': '%{&readonly?"⭤":""}',
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-      \ }
-"}}}
+NeoBundle 'rking/ag.vim'
+nmap ' :Ag <c-r>=expand("<cword>")<cr><cr>
+nnoremap <space>/ :Ag
+
+"Import
+runtime conf.d/lightline.vimrc
+runtime conf.d/ctrlp.vimrc
+runtime conf.d/key-mapping.vimrc
+runtime conf.d/submode.vimrc
+runtime conf.d/neocomplete.vimrc
+runtime conf.d/quickrun.vimrc
+runtime conf.d/markdown.vimrc
+runtime conf.d/gitgutter.vimrc
+"runtime conf.d/ultisnips.vimrc
+runtime conf.d/web.vimrc
+runtime conf.d/ruby.vimrc
+runtime conf.d/objc.vimrc
+runtime conf.d/go.vimrc
+runtime conf.d/vim.vimrc
+runtime conf.d/watchdogs.vimrc
+NeoBundleCheck
 
 "===============================================================================
 " 設定
-"{{{
 colorscheme railscasts
 syntax on
 set directory=~/.vim/tmp
 set backupdir=~/.vim/tmp
-set tabstop=4 shiftwidth=4 softtabstop=0
-set noexpandtab
+set tabstop=2 shiftwidth=2 softtabstop=0
+set expandtab
 set number
+set showcmd
 if has('persistent_undo')
-    set undodir=~/.vim/tmp
-    set undofile
+	set undodir=~/.vim/tmp
+	set undofile
 endif
-
-
-"}}}
-
-"===============================================================================
-" Neocomplete
-"{{{
-let g:neocomplete#enable_at_startup = 1
-" Define keyword.
-let g:neocomplete#keyword_patterns = {}
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-let g:neocomplete#omni_patterns = {}
-
-"" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"
-"" Snippets expand
-imap <expr><C-k> neocomplete#sources#snippets_complete#expandable() ? "\<Plug>(neocomplete#snippets_expand)" : "\<C-o>D"
-smap <C-k> <Plug>(neocomplete#snippets_expand)
-
-" Enable omni completion.
-autocmd FileType perl setlocal omnifunc=perlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete tabstop=2 shiftwidth=2
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType vim setlocal omnifunc=complete#CompleteCSS
-
-let g:neocomplete#dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'coffee' : $HOME.'/.vim/dict/javascript.dict'
-    \ }
-"}}}
-
-"===============================================================================
-" QuickRun
-let g:quickrun_config = {}
-let g:quickrun_config._ = {
-	 \'runner' : 'vimproc',
-	 \'runner/vimproc/updatetime' : 10,
-	 \'outputter/buffer/split': ':botright'
-	 \}
-"===============================================================================
-" Markdown
-let g:quickrun_config.markdown = {
-      \ 'outputter' : 'null',
-      \ 'command'   : 'open',
-      \ 'cmdopt'    : '-a',
-      \ 'args'      : 'Marked',
-      \ 'exec'      : '%c %o %a %s',
-      \ }
-
-"===============================================================================
-" NeoSnippet
-" Plugin key-mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-   set conceallevel=2 concealcursor=i
-endif
-
-"===============================================================================
-" RSpec
-
-augroup RSpec
-  autocmd!
-  autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-augroup END
-
-let g:quickrun_config['ruby.rspec'] = {
-	 \ 'command': 'rspec',
-	 \ 'cmdopt': '-fs --color -I.',
-	 \ 'outputter/buffer/filetype': 'rspec-result'
-	 \}
-
-"===============================================================================
-" CoffeeScript
-" インデントを設定
-autocmd FileType coffee     setlocal ts=2 sw=2 et
-
-"===============================================================================
-" VimFiler
-" デフォルトに設定
-let g:vimfiler_as_default_explorer = 1
-
-"===============================================================================
-" Go
-set rtp+=$GOROOT/misc/vim
-exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-exe "set rtp+=".globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
-set completeopt=menu,preview
-let g:neocomplete#omni_patterns.go = '\h\w*\.\?'
-auto BufWritePre *.go Fmt
-
-
-"===============================================================================
-" CtrlP
-let g:ctrlp_use_migemo = 1
-
-"===============================================================================
-" GitGutter
-let g:gitgutter_enabled = 1
-autocmd BufEnter * sign define dummy
-autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
-
-
-"===============================================================================
-" Objective-C 
-let g:quickrun_config['objc'] = {
-\   'command': 'clang',
-\	'cmdopt': '-framework Foundation',
-\   'exec': ['%c %o %s -o %s:p:r', '%s:p:r %a'],
-\   'tempfile': '%{tempname()}.m',
-\   'hook/sweep/files': '%S:p:r',
-\ }
-
-"===============================================================================
-" submode 
-NeoBundle "kana/vim-submode"
-call submode#enter_with('winsize', 'n', '', '<C-w>>', '<C-w>>')
-call submode#enter_with('winsize', 'n', '', '<C-w><', '<C-w><')
-call submode#enter_with('winsize', 'n', '', '<C-w>+', '<C-w>-')
-call submode#enter_with('winsize', 'n', '', '<C-w>-', '<C-w>+')
-call submode#map('winsize', 'n', '', '>', '<C-w>>')
-call submode#map('winsize', 'n', '', '<', '<C-w><')
-call submode#map('winsize', 'n', '', '+', '<C-w>-')
-call submode#map('winsize', 'n', '', '-', '<C-w>+')
-
-"===============================================================================
-" TwilioCall
-NeoBundle 'twiliocall-vim', {
-			\ "type" : "nosync",
-			\}
-
-let g:twiliocall_from = '+17402744226'
-let g:twiliocall_sid = 'AC996ac19dd791add3ff7437c62bbe0fc3'
-let g:twiliocall_auth_token = 'a4613c5c26cfa9803eceb13fa127d1c8'
-
+set laststatus=2
