@@ -53,15 +53,23 @@ NeoBundle 'rking/ag.vim'
 nmap ' :Ag <c-r>=expand("<cword>")<cr><cr>
 nnoremap <space>/ :Ag
 
+NeoBundle 'justinmk/vim-dirvish'
+
 "Import
 runtime conf.d/lightline.vimrc
 runtime conf.d/ctrlp.vimrc
 runtime conf.d/key-mapping.vimrc
+runtime conf.d/gitgutter.vimrc
 runtime conf.d/submode.vimrc
 runtime conf.d/neocomplete.vimrc
 runtime conf.d/quickrun.vimrc
+"Languages support
+NeoBundle 'Keithbsmiley/swift.vim'
+let g:quickrun_config['swift'] = {
+  \ 'command': 'swift',
+  \ 'exec': '%c %s',
+  \}
 runtime conf.d/markdown.vimrc
-runtime conf.d/gitgutter.vimrc
 "runtime conf.d/ultisnips.vimrc
 runtime conf.d/web.vimrc
 runtime conf.d/ruby.vimrc
