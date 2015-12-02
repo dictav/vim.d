@@ -3,9 +3,11 @@ NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'tacahiroy/ctrlp-funky'
 NeoBundle 'sgur/ctrlp-extensions.vim'
 NeoBundle 'kaneshin/ctrlp-sonictemplate'
+NeoBundle 'zeero/vim-ctrlp-gista'
 let g:ctrlp_map = '<Nop>'
 let g:ctrlp_use_migemo = 1
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard | grep -v www']
+"let g:ctrlp_user_command = 'files -p %s'
 " Guess vcs root dir
 let g:ctrlp_working_path_mode = 'ra'
 " Open new file in current window

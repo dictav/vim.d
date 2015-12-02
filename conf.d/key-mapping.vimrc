@@ -9,6 +9,7 @@ nnoremap [CtrlP]m :<C-u>CtrlPMRUFiles<CR>
 nnoremap [CtrlP]q :<C-u>CtrlPQuickfix<CR>
 nnoremap [CtrlP]s :<C-u>CtrlPMixed<CR>
 nnoremap [CtrlP]t :<C-u>CtrlPTag<CR>
+nnoremap [CtrlP]g :<C-u>CtrlPGista<CR>
 
 " VIMRC
 nnoremap [vimrc] <Nop>

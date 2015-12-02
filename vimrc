@@ -1,7 +1,7 @@
 lang ja_JP
 let &t_Co=256
-set encoding=utf-8
 set shell=/bin/bash
+set encoding=utf-8
 
 "===============================================================================
 " NeoBundle
@@ -35,6 +35,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'mattn/sonictemplate-vim'
+NeoBundle 'lambdalisue/vim-gista'
 NeoBundle "cohama/vim-hier"
 NeoBundle "dannyob/quickfixstatus"
 NeoBundle 'digitaltoad/vim-jade'
