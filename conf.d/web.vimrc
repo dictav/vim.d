@@ -1,5 +1,10 @@
 " JavaScript
+NeoBundle 'moll/vim-node'
 NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'pangloss/vim-javascript'
+"NeoBundle 'mattn/jscomplete-vim'
+"autocmd FileType javascript
+"  \ :setl omnifunc=jscomplete#CompleteJS
 " LESS
 NeoBundle 'groenewege/vim-less'
 " CoffeeScript's syntax + autocompile
