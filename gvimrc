@@ -17,7 +17,7 @@ set visualbell
 if has('gui_macvim')
 	if has('gui_running')
 		lang ja_JP
-		set guifont=Menlo:h14
+    set guifont=Menlo\ for\ Powerline:16
     set linespace=2
  		highlight CursorIM guifg=NONE guibg=lightyellow
 	endif
