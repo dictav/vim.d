@@ -42,6 +42,7 @@ NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'gkz/vim-ls'
 NeoBundle 'cohama/the-ocamlspot.vim'
 NeoBundle 'def-lkb/ocp-indent-vim'
+NeoBundle 'jdonaldson/vaxe'
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
@@ -51,7 +52,7 @@ NeoBundle 'junegunn/vim-easy-align'
 vnoremap <silent> <Enter> :EasyAlign<cr>
 
 NeoBundle 'rking/ag.vim'
-nmap ' :Ag <c-r>=expand("<cword>")<cr><cr>
+"nmap ' :Ag <c-r>=expand("<cword>")<cr><cr>
 nnoremap <space>/ :Ag
 
 NeoBundle 'justinmk/vim-dirvish'
@@ -71,6 +72,7 @@ let g:quickrun_config['swift'] = {
   \ 'exec': '%c %s',
   \}
 runtime conf.d/markdown.vimrc
+runtime conf.d/haxe.vimrc
 "runtime conf.d/ultisnips.vimrc
 runtime conf.d/web.vimrc
 runtime conf.d/ruby.vimrc
