@@ -2,8 +2,7 @@
 !.gitignore
 !.gitsubmodule
 
-bundle/*
-!bundle/neobundle.vim
+plugged/*
 
 tmp/*
 !tmp/.git_keep
